@@ -12,12 +12,12 @@ import java.util.Scanner;
 public class IODemo {
 
     public static void main(String[] args) {
-        //FileInputStreamTest();
+        FileInputStreamTest();
         //FileReader();
         //FileOutputStreamTest();
         //FileWriterTest();
         //BufferedReaderTest();
-        BufferedWriterTest();
+        //BufferedWriterTest();
     }
 
     public static void FileInputStreamTest(){
@@ -25,8 +25,8 @@ public class IODemo {
         try{
             fis = new FileInputStream("D:\\1.txt");
             byte[] buf = new byte[1024];
-            int len =0;
-            while((len=fis.read(buf))!=-1){
+            int len = 0;
+            while(fis.read(buf)!=-1){
                 System.out.println(new String(buf,0,buf.length));
             }
         }catch(IOException e){

@@ -1,26 +1,26 @@
 package com.Socket;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
 public class LapTcpClient {
     public static void main(String[] args) throws Exception{
-        Socket s = new Socket("219.216.110.61",10008);
-        OutputStream os = s.getOutputStream();
-        InputStream is = s.getInputStream();
-        Scanner scan = new Scanner(System.in);
-        while (scan.hasNext()){
-            String str = scan.next();
+        Socket s = new Socket("202.199.5.129",10008);
+        BufferedReader bufsin = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader bufin = new BufferedReader(new InputStreamReader(s.getInputStream()));
+        BufferedWriter bufout = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+        String str = null;
+        while ((str=bufsin.readLine())!=null) {
             if("over".equals(str)) break;
-            os.write(str.getBytes());
-            os.flush();
-            byte[] buf = new byte[1024];
-            int len = is.read(buf);
-            System.out.println(new String(buf,0,buf.length));
+            bufout.write(str);
+            bufout.newLine();
+            bufout.flush();
+            System.out.println("Server:"+bufin.readLine());
         }
-        os.close();
+
+        bufout.close();
+        bufin.close();
         s.close();
     }
 }

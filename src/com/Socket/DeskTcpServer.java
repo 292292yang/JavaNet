@@ -1,7 +1,6 @@
 package com.Socket;
 
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -11,17 +10,20 @@ public class DeskTcpServer {
         Socket s = ss.accept();
         String ip = s.getInetAddress().getHostAddress();
         System.out.println(ip+".....connected");
-        InputStream is = s.getInputStream();
-        OutputStream os = s.getOutputStream();
-        byte[] buf = new byte[1024];
-        int len = 0;
-        while((len=is.read(buf))!=-1){
-            String str = new String(buf,0,buf.length);
-            System.out.println(str);
-            os.write(("what you say....."+str).getBytes());
+        BufferedReader bufsin = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader bufin = new BufferedReader(new InputStreamReader(s.getInputStream()));
+        BufferedWriter bufout = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+        String data = null;
+        while((data=bufin.readLine())!=null){
+            System.out.println("Client:"+data);
+            String saytoClient = bufsin.readLine();
+            //System.out.println("Server:"+saytoClient);
+            bufout.write(saytoClient);
+            bufout.newLine();
+            bufout.flush();
         }
-        is.close();
-        os.close();
+        bufout.close();
+        bufin.close();
         s.close();
         ss.close();
 
