@@ -22,13 +22,13 @@ public class URLConnDemo
             }
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(connection.getInputStream()));
-            String urlString = "";
-            String current;
+
+            String current = null;
             while((current = in.readLine()) != null)
             {
-                urlString += current;
+                System.out.println(current);
             }
-            System.out.println(urlString);
+
         }catch(IOException e)
         {
             e.printStackTrace();

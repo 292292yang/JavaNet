@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class LapTcpClient {
     public static void main(String[] args) throws Exception{
-        Socket s = new Socket("202.199.5.129",10008);
+        Socket s = new Socket("219.216.110.61",10009);
         BufferedReader bufsin = new BufferedReader(new InputStreamReader(System.in));
         BufferedReader bufin = new BufferedReader(new InputStreamReader(s.getInputStream()));
         BufferedWriter bufout = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));

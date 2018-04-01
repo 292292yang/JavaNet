@@ -10,14 +10,12 @@ import java.net.URLConnection;
 public class TestURL {
     public static void main(String[] args) {
         try{
-            URL url = new URL("http://47.94.148.26/html/phpmyadmin/");
-            //InputStream is = url.openStream();
-            URLConnection uc = url.openConnection();
-            InputStream is = uc.getInputStream();
-            InputStreamReader isr = new InputStreamReader(is,"utf-8");
-            BufferedReader br = new BufferedReader(isr);
-            while(br.readLine()!=null){
-                String data = br.readLine();
+            URL url = new URL("http://ipgw.neu.edu.cn/srun_portal_pc.php?ac_id=1&");
+            URLConnection conn = url.openConnection();
+            System.out.println(conn);
+            BufferedReader bufin = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String data = null;
+            while((data=bufin.readLine())!=null){
                 System.out.println(data);
             }
         }catch(IOException e){
